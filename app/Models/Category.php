@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    private $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function menus()
     {
