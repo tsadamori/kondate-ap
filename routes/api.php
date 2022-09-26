@@ -20,4 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/menus', [Api\MenuController::class, 'index']);
+Route::post('/menus', [Api\MenuController::class, 'create']);
+Route::get('/menus/{menuId}', [Api\MenuController::class, 'show']);
+Route::put('/meus/{menuId}', [Api\MenuController::class, 'udate']);
+Route::delete('/menus/{menuId}', [Api\MenuController::class, 'delete']);
+
 Route::get('/categories', [Api\CategoryController::class, 'index']);

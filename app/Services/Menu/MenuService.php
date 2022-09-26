@@ -3,6 +3,7 @@
 namespace App\Services\Menu;
 
 use App\Interfaces\Menu\MenuServiceInterface;
+use App\Models\Menu;
 use App\Repositories\Menu\MenuRepository;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,5 +31,25 @@ class MenuService implements MenuServiceInterface
             ],
             'menus' => $menus,
         ];
+    }
+
+    public function showMenu(int $menuId): array
+    {
+        return $this->menuRepository->getMenu($menuId)->toArray();
+    }
+
+    public function createMenu(array $payload): array
+    {
+        return $this->menuRepository->createMenu($payload)->toArray();
+    }
+
+    public function updateMenu(int $menuId, array $payload): array
+    {
+        return $this->menuRepository->updateMenu($payload)->toArray();
+    }
+
+    public function deleteMenu(int $menuId): void
+    {
+        $this->menuRepository->deleteMenu($menuId);
     }
 }

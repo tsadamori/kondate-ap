@@ -22,4 +22,24 @@ class MenuRepository implements MenuRepositoryInterface
     {
         return Menu::count();
     }
+
+    public function getMenu(int $menuId): Menu
+    {
+        return Menu::findOrFail($menuId);
+    }
+
+    public function createMenu(array $payload): Menu
+    {
+        return Menu::create($payload);
+    }
+
+    public function updateMenu(int $menuId, array $payload): Menu
+    {
+        return Menu::findOrFail($menuId)->update($payload);
+    }
+
+    public function deleteMenu(int $menuId): void
+    {
+        Menu::findOrFail($menuId)->delete();
+    }
 }
