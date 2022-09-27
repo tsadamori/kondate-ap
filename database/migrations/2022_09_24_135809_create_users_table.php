@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->comment('ユーザー名');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->string('password')->unique()->comment('パスワード');
-            $table->string('profile')->comment('ユーザープロフィール');
+            $table->string('profile')->nullable()->comment('ユーザープロフィール');
             $table->string('image_url')->nullable()->commet('ユーザー画像のURL');
 
             $table->rememberToken();
