@@ -26,3 +26,6 @@ Route::put('/meus/{menuId}', [Api\MenuController::class, 'udate']);
 Route::delete('/menus/{menuId}', [Api\MenuController::class, 'delete']);
 
 Route::get('/categories', [Api\CategoryController::class, 'index']);
+
+Route::get('/users', [Api\UserController::class, 'index']);
+Route::get('/users/{userId}', [Api\UserController::class, 'show']);
