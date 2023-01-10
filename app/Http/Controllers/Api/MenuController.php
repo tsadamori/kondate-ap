@@ -56,7 +56,7 @@ class MenuController extends Controller
             'relatedLink' => $request->relatedLink ?? null,
             'description' => $request->description ?? null,
         ];
-        return response()->json($this->menuServivce->updateMenu($menuId, $payload));
+        return response()->json($this->menuService->updateMenu($menuId, $payload));
     }
 
     public function delete(int $menuId): void
