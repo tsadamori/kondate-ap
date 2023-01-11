@@ -19,13 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/menus', [Api\MenuController::class, 'index']);
-Route::post('/menus', [Api\MenuController::class, 'create']);
-Route::get('/menus/{menuId}', [Api\MenuController::class, 'show']);
-Route::put('/meus/{menuId}', [Api\MenuController::class, 'udate']);
-Route::delete('/menus/{menuId}', [Api\MenuController::class, 'delete']);
+Route::prefix('/v1')->group(function () {
+    Route::get('/menus', [Api\MenuController::class, 'index']);
+    Route::post('/menus', [Api\MenuController::class, 'create']);
+    Route::get('/menus/{menuId}', [Api\MenuController::class, 'show']);
+    Route::put('/meus/{menuId}', [Api\MenuController::class, 'update']);
+    Route::delete('/menus/{menuId}', [Api\MenuController::class, 'delete']);
 
-Route::get('/categories', [Api\CategoryController::class, 'index']);
+    Route::get('/categories', [Api\CategoryController::class, 'index']);
 
-Route::get('/users', [Api\UserController::class, 'index']);
-Route::get('/users/{userId}', [Api\UserController::class, 'show']);
+    Route::get('/users', [Api\UserController::class, 'index']);
+    Route::get('/users/{userId}', [Api\UserController::class, 'show']);
+});
