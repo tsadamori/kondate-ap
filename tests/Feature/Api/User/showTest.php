@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class IndexTest extends TestCase
+class showTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,12 +17,18 @@ class IndexTest extends TestCase
         parent::setUp();
 
         /** @var User $users */
-        $this->users = User::factory(10)->create([]);
+        $this->users = User::factory()->create([]);
     }
 
     public function testSuccess(): void
     {
-        $this->get('/api/v1/users')
-            ->assertStatus(200);
+        $this->get('/api/v1/users/1')
+            ->assertStatus(404);
+    }
+
+    public function testReturn404WhenUserIdIsNotExists(): void
+    {
+        $this->get('/api/v1/users/2')
+            ->assertStatus(404);
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Api\User;
+namespace Tests\Feature\Api\Category;
 
-use App\Models\User;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,13 +16,13 @@ class IndexTest extends TestCase
     {
         parent::setUp();
 
-        /** @var User $users */
-        $this->users = User::factory(10)->create([]);
+        /** @var Category $categories */
+        $this->categories = Category::factory(10)->create([]);
     }
 
     public function testSuccess(): void
     {
-        $this->get('/api/v1/users')
+        $this->get('/api/v1/categories')
             ->assertStatus(200);
     }
 }
