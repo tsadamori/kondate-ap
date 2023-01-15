@@ -10,7 +10,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 {
     public function getCategories(int $limit, int $offset, array $where = null): Collection
     {
-        return Category::when($where, function($query) use($where) {
+        return Category::when($where, function ($query) use ($where) {
             return $query->where($where);
         })
         ->limit($limit)

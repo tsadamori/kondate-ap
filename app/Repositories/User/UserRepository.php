@@ -10,7 +10,7 @@ class UserRepository implements UserRepositoryInterface
 {
     public function getUsers(int $limit, int $offset, array $where = null): Collection
     {
-        return User::when($where, function($query) use($where) {
+        return User::when($where, function ($query) use ($where) {
             return $query->where($where);
         })
         ->limit($limit)

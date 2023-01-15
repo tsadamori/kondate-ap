@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<ruleset name="PSR12/Laravel">
+    <description>PSR12 compliant rules and settings for Laravel</description>
+
+    <arg name="extensions" value="php" />
+
+    <!-- PSR12に準拠 -->
+    <rule ref="PSR12" />
+
+    <!-- strictモード -->
+    <!-- <rule ref="Generic.PHP.RequireStrictTypes" /> -->
+
+    <!-- use宣言の順番 -->
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
+
+    <!-- use宣言のグループ化は禁止 -->
+    <rule ref="PSR12.Namespaces.CompoundNamespaceDepth">
+        <properties>
+            <property name="maxDepth" value="0" />
+        </properties>
+    </rule>
+
+    <!-- 変数はキャメルケース -->
+    <rule ref="Squiz.NamingConventions.ValidVariableName.NotCamelCaps" />
+    <rule ref="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps" />
+
+    <!-- array()は禁止 []を使う -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found" />
+
+    <!-- 配列の最終行にカンマを付与 -->
+    <rule ref="Squiz.Arrays.ArrayDeclaration.NoCommaAfterLast">
+        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.NoSpaceAfterComma"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNoNewline"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
+    </rule>
+
+    <!-- キャスト演算子と変数の間はスペースなし -->
+    <rule ref="Generic.Formatting.NoSpaceAfterCast.SpaceFound" />
+
+    <!-- 出力に色を適用 -->
+    <arg name="colors" />
+
+    <!-- オプション p:進捗表示  s:エラー表示時にルールを表示 -->
+    <arg value="ps" />
+
+    <!-- 除外ディレクトリ -->
+    <exclude-pattern>/bootstrap/</exclude-pattern>
+    <exclude-pattern>/config/</exclude-pattern>
+    <exclude-pattern>/database/</exclude-pattern>
+    <exclude-pattern>/public/</exclude-pattern>
+    <exclude-pattern>/resources/</exclude-pattern>
+    <exclude-pattern>/routes/</exclude-pattern>
+    <exclude-pattern>/storage/</exclude-pattern>
+    <exclude-pattern>/vendor/</exclude-pattern>
+</ruleset>

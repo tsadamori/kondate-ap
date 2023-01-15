@@ -10,7 +10,7 @@ class MenuRepository implements MenuRepositoryInterface
 {
     public function getMenus(int $limit, int $offset, array $where = null): Collection
     {
-        return Menu::when($where, function($query) use($where) {
+        return Menu::when($where, function ($query) use ($where) {
             return $query->where($where);
         })
         ->limit($limit)
