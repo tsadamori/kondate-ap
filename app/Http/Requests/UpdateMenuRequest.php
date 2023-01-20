@@ -32,6 +32,11 @@ class UpdateMenuRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array
+     */
     public function message()
     {
         return [

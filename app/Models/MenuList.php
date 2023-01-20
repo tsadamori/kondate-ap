@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MenuList extends Model
 {
@@ -11,12 +13,12 @@ class MenuList extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function menus()
+    public function menus(): HasMany
     {
         return $this->hasMany(Menu::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

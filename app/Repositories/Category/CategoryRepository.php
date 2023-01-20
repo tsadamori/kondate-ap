@@ -13,9 +13,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         return Category::when($where, function ($query) use ($where) {
             return $query->where($where);
         })
-        ->limit($limit)
-        ->offset($offset)
-        ->get();
+            ->limit($limit)
+            ->offset($offset)
+            ->get();
     }
 
     public function getCount(): int

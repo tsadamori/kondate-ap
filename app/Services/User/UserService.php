@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 class UserService implements UserServiceInterface
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {

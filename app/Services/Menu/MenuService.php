@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MenuService implements MenuServiceInterface
 {
+    private MenuRepository $menuRepository;
     public function __construct(MenuRepository $menuRepository)
     {
         $this->menuRepository = $menuRepository;
@@ -45,7 +46,7 @@ class MenuService implements MenuServiceInterface
 
     public function updateMenu(int $menuId, array $payload): array
     {
-        return $this->menuRepository->updateMenu($payload)->toArray();
+        return $this->menuRepository->updateMenu($menuId, $payload)->toArray();
     }
 
     public function deleteMenu(int $menuId): void
