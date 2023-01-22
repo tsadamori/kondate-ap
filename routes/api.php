@@ -20,14 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('/v1')->group(function () {
-    Route::get('/menus', [Api\MenuController::class, 'index']);
-    Route::post('/menus', [Api\MenuController::class, 'create']);
-    Route::get('/menus/{menuId}', [Api\MenuController::class, 'show']);
-    Route::put('/meus/{menuId}', [Api\MenuController::class, 'update']);
-    Route::delete('/menus/{menuId}', [Api\MenuController::class, 'delete']);
-
-    Route::get('/categories', [Api\CategoryController::class, 'index']);
-
-    Route::get('/users', [Api\UserController::class, 'index']);
-    Route::get('/users/{userId}', [Api\UserController::class, 'show']);
+    ROute::prefix('/menus')->group(__DIR__ . '/api/menus.php');
+    Route::prefix('/categories')->group(__DIR__ . '/api/categories.php');
+    Route::prefix('/users')->group(__DIR__ . '/api/users.php');
 });
