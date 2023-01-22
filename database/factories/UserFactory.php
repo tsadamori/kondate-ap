@@ -19,7 +19,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => $this->faker->unique()->password(),
             'profile' => 'サンプルプロフィール',
-            'image_url' => '/storage/sample.jpg',
+            'image_url' => 'storage/user_image/1',
             'remember_token' => Str::random(10),
         ];
     }

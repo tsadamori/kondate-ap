@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => 'サンプルカテゴリー',
             'm_category_class_id' => $this->faker->randomElement($array = [1, 2])
         ];
     }

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Api\User;
+namespace Tests\Feature\Api\Menu;
 
-use App\Models\User;
+use App\Models\Menu;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ShowTest extends TestCase
+class showTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -16,19 +16,19 @@ class ShowTest extends TestCase
     {
         parent::setUp();
 
-        /** @var User $users */
-        $this->users = User::factory()->create(['id' => 1]);
+        /** @var Menus $menus */
+        $this->menus = Menu::factory()->create(['id' => 1]);
     }
 
     public function testSuccess(): void
     {
-        $this->get('/api/v1/users/1')
+        $this->get('/api/v1/menus/1')
             ->assertStatus(200);
     }
 
     public function testReturn404WhenUserIdIsNotExists(): void
     {
-        $this->get('/api/v1/users/2')
+        $this->get('/api/v1/menus/2')
             ->assertStatus(404);
     }
 }
