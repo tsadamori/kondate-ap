@@ -28,8 +28,20 @@ class CreateMenuRequest extends FormRequest
             'categoryIds' => 'required|min:1',
             'name' => 'required|max:255',
             'ingredients' => 'required|min:1',
-            'relatedLink' => 'required|max:255',
-            'description' => 'required|max:65535'
+            'relatedLink' => 'max:255',
+            'description' => 'max:65535'
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'メニュー名',
+            'userId' => 'ユーザーID',
+            'categoryIds' => 'カテゴリー',
+            'ingredients' => '材料',
+            'relatedLink' => '関連リンク',
+            'description' => 'メニュー詳細'
         ];
     }
 
@@ -38,16 +50,16 @@ class CreateMenuRequest extends FormRequest
      *
      * @return array
      */
-    public function message()
+    public function messages()
     {
         return [
-            'userId:required' => 'ユーザーIDを指定してください',
-            'categoryIds:required' => 'カテゴリーは少なくとも1つ指定してください',
-            'name:required' => 'メニュー名を入力してください',
-            'name:max' => 'メニュー名は255文字以下にしてください',
-            'ingredients:min' => '材料は少なくとも1つ指定してください',
-            'relatedLink:max' => '関連リンクは255文字以下にしてください',
-            'description:max' => 'メニュー詳細は65535文字以下にしてください',
+            'userId.required' => ':attributeを指定してください',
+            'categoryIds.required' => ':attributeは少なくとも1つ指定してください',
+            'name.required' => ':attributeを入力してください',
+            'name.max' => ':attributeは255文字以下にしてください',
+            'ingredients.required' => ':attributeは少なくとも1つ指定してください',
+            'relatedLink.max' => ':attributeは255文字以下にしてください',
+            'description.max' => ':attributeは65535文字以下にしてください',
         ];
     }
 }

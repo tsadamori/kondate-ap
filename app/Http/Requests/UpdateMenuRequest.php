@@ -32,19 +32,31 @@ class UpdateMenuRequest extends FormRequest
         ];
     }
 
+    public function attributes(): array
+    {
+        return [
+            'name' => 'メニュー名',
+            'userId' => 'ユーザーID',
+            'categoryIds' => 'カテゴリー',
+            'ingredients' => '材料',
+            'relatedLink' => '関連リンク',
+            'description' => 'メニュー詳細'
+        ];
+    }
+
     /**
      * Get the validation messages that apply to the request.
      *
      * @return array
      */
-    public function message()
+    public function messages()
     {
         return [
-            'categoryIds:required' => 'カテゴリーは少なくとも1つ指定してください',
-            'name:max' => 'メニュー名は255文字以下にしてください',
-            'ingredients:min' => '材料は少なくとも1つ指定してください',
-            'relatedLink:max' => '関連リンクは255文字以下にしてください',
-            'description:max' => 'メニュー詳細は65535文字以下にしてください',
+            'categoryIds.required' => ':attributeは少なくとも1つ指定してください',
+            'name.max' => ':attributeは255文字以下にしてください',
+            'ingredients.min' => ':attributeは少なくとも1つ指定してください',
+            'relatedLink.max' => ':attributeは255文字以下にしてください',
+            'description.max' => ':attributeは65535文字以下にしてください',
         ];
     }
 }
