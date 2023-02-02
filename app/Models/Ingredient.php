@@ -10,6 +10,12 @@ class Ingredient extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'menu_id',
+        'name',
+        'quantity'
+    ];
+
     protected $hidden = ['created_at', 'updated_at'];
 
     public function menu(): BelongsTo

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class MenuService implements MenuServiceInterface
 {
     private MenuRepository $menuRepository;
+
     public function __construct(MenuRepository $menuRepository)
     {
         $this->menuRepository = $menuRepository;

@@ -8,7 +8,7 @@ use App\Models\Menu;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class showTest extends TestCase
+class ShowTest extends TestCase
 {
     use RefreshDatabase;
 

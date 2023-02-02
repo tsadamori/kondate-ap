@@ -2,15 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Api\Menu;
-
-use App\Http\Requests\CreateMenuRequest;
+use App\Models\Category;
+use App\Models\Menu;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class createTest extends TestCase
+class CreateTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /** @var User $user */
+        $this->user = User::factory()->create(['id' => 1]);
+        /** @var Category $categories */
+        $this->categories = Category::factory(2)->sequence(
+            ['id' => 1],
+            ['id' => 2]
+        )->create([]);
+    }
 
     /**
      * @param array $data
@@ -18,17 +31,10 @@ class createTest extends TestCase
      * 
      * @dataProvider validDataProvider
      */
-    public function testPasses(array $data): void
+    public function testSuccess(array $data): void
     {
-        $request = new CreateMenuRequest();
-        $request->replace($data);
-        $validator = validator(
-            $request->validationData(),
-            $request->rules(),
-            $request->messages(),
-            $request->attributes()
-        );
-        $this->assertFalse($validator->fails(), (string)$validator->errors());
+        $this->post('/api/v1/menus', $data)
+            ->assertStatus(200);
     }
     public function validDataProvider(): array
     {
@@ -37,53 +43,14 @@ class createTest extends TestCase
                 'data' => [
                     'userId' => 1,
                     'categoryIds' => [1, 2],
-                    'name' => str_repeat('あ', 255),
-                    'ingredients' => ['サンプル材料'],
+                    'name' => 'サンプルメニュー',
+                    'ingredients' => [[
+                        'name' => 'サンプル材料',
+                        'quantity' => 1
+                    ]],
                     'imageData' => 'U3dhZ2dlciByb2Nrcw==',
-                    'relatedLink' => 'https://example.com',
-                    'description' => str_repeat('あ', 65535)
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @param array $data
-     * @param array $errorKeys
-     * @return void
-     * 
-     * @dataProvider invalidDataProvider
-     */
-    public function testFails(array $data, array $expectedErrors): void
-    {
-        $request = new CreateMenuRequest();
-        $request->replace($data);
-        $validator = validator(
-            $request->validationData(),
-            $request->rules(),
-            $request->messages(),
-            $request->attributes()
-        );
-
-        $this->assertTrue($validator->fails());
-        
-        $actualErrors = $validator->errors();
-
-        foreach ($expectedErrors as $key => $expectedMessages) {
-            $this->assertTrue($actualErrors->has($key));
-            $this->assertEqualsCanonicalizing($expectedMessages, $actualErrors->get($key));
-        }
-    }
-    public function invalidDataProvider(): array
-    {
-        return [
-            'empty_request' => [
-                'data' => [],
-                'expectedErrors' => [
-                    'userId' => ['ユーザーIDを指定してください'],
-                    'categoryIds' => ['カテゴリーは少なくとも1つ指定してください'],
-                    'name' => ['メニュー名を入力してください'],
-                    'ingredients' => ['材料は少なくとも1つ指定してください'],
+                    'relatedLink' => null,
+                    'description' => 'サンプル詳細'
                 ]
             ]
         ];

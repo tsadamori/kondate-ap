@@ -3,6 +3,7 @@
 namespace App\Repositories\Menu;
 
 use App\Interfaces\Menu\MenuRepositoryInterface;
+use App\Models\Ingredient;
 use App\Models\Menu;
 use Illuminate\Support\Collection;
 
@@ -30,7 +31,27 @@ class MenuRepository implements MenuRepositoryInterface
 
     public function createMenu(array $payload): Menu
     {
-        return Menu::create($payload);
+        $data = [
+            'user_id' => $payload['userId'],
+            'name' => $payload['name'],
+            'image_url' => $payload['imageData'],
+            'related_link' => $payload['relatedLink'],
+            'description' => $payload['description']
+        ];
+        $menu = Menu::create($data);
+
+        foreach ($payload['ingredients'] as $ingredient) {
+            Ingredient::create([
+                'menu_id' => $menu->id,
+                'name' => $ingredient['name'],
+                'quantity' => $ingredient['quantity']
+            ]);
+        }
+        foreach ($payload['categoryIds'] as $categoryId) {
+            $menu->categories()->attach($categoryId);
+        }
+
+        return $menu;
     }
 
     public function updateMenu(int $menuId, array $payload): Menu

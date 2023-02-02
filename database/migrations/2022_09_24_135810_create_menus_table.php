@@ -16,7 +16,6 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('メニューID');
             $table->unsignedBigInteger('user_id')->nullable()->index()->comment('メニューが所属するユーザーID');
-            $table->unsignedBigInteger('category_id')->nullable()->index()->comment('メニューが所属するカテゴリID');
             $table->string('name')->comment('メニュー名');
             $table->string('image_url')->nullable()->comment('メニューの画像URL');
             $table->string('related_link')->nullable()->comment('メニューの関連リンク');
@@ -30,11 +29,11 @@ class CreateMenusTable extends Migration
                 ->onUpdate('no action')
                 ->onDeleteCascade();
 
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onUpdate('no action')
-                ->onDeleteCascade();
+            // $table->foreign('category_id')
+            //     ->references('id')
+            //     ->on('categories')
+            //     ->onUpdate('no action')
+            //     ->onDeleteCascade();
         });
     }
 

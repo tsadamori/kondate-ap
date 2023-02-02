@@ -17,7 +17,6 @@ class MenuFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'category_id' => Category::factory(),
             'name' => 'サンプルメニュー',
             'image_url' => 'storage/menu_image/1',
             'related_link' => 'related_link/1',
